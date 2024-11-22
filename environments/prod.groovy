@@ -1,0 +1,7 @@
+config {
+    ENV_NAME = "prod"
+    SNOWFLAKE_URL = credentials('SNOWFLAKE_URL')
+    SNOWFLAKE_SCHEMA = "HYD"
+    SNOWFLAKE_USER = credentials('SNOWFLAKE_USERNAME')
+    SNOWFLAKE_PASSWORD = credentials('SNOWFLAKE_PASSWORD')
+}
