@@ -1,9 +1,20 @@
+// runflywaymigrations.groovy
+
 def call() {
     node {
-        // Load the environment-specific configuration file based on the selected ENV_NAME
+        // Ensure ENV_NAME is set (from parameter passed to pipeline)
+        if (!params.ENV_NAME) {
+            error "ENV_NAME parameter is missing or not set."
+        }
+
+        // Define the environment configuration file path based on the ENV_NAME parameter
         def envConfigFile = "environments/${params.ENV_NAME}.groovy"
 
-        // Check if the config file exists in the 'environments' folder
+        // Ensure the config file exists in the GitHub repository
+        echo "Looking for config file: ${envConfigFile}"
+
+        // Assuming that the environment files (dev.groovy, prod.groovy, uat.groovy) are in the repository
+        // and are being checked out during the pipeline
         if (!fileExists(envConfigFile)) {
             error "Config file for environment ${params.ENV_NAME} does not exist."
         }
