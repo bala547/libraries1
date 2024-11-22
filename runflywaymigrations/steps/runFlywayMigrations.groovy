@@ -1,5 +1,7 @@
 void call() {
     node {
+        echo "Running Flyway migrations for environment: ${config.ENV_NAME}"
+        echo "Using schema: ${config.SNOWFLAKE_SCHEMA}"
         // The Docker image for Flyway
         def flywayImage = 'flyway/flyway:10.17.3' 
 
