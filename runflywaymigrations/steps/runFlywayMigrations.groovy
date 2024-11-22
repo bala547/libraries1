@@ -3,18 +3,18 @@ void call() {
         // The Docker image for Flyway
         def flywayImage = 'flyway/flyway:10.17.3'
 
-        // Print a message indicating that migrations will start
-        echo "Running Flyway Migrations..."
-
-        // Check if ENVIRONMENT parameter is set
+        // Ensure the ENVIRONMENT parameter is set before proceeding
         if (!params.ENVIRONMENT) {
             error "ENVIRONMENT parameter is not set. Please provide a valid environment."
         }
 
+        // Print a message indicating that migrations will start
+        echo "Running Flyway Migrations..."
+
         // Print the value of ENVIRONMENT for debugging
         echo "Loading environment configuration for: ${params.ENVIRONMENT}"
 
-        // Load the environment-specific configuration
+        // Load the environment-specific configuration based on ENVIRONMENT
         def envConfig = load "environments/${params.ENVIRONMENT}.groovy"
 
         // Run the Flyway migration command using the injected credentials
